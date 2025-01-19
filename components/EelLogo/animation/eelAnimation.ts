@@ -30,6 +30,23 @@ export const createEelTimeline = (
   return eelTl;
 };
 
+const resetEelAnimation = (
+  refs: EelRefs,
+  eelTl: gsap.core.Timeline,
+  electricTl: gsap.core.Timeline,
+  config: AnimationConfig
+) => {
+  eelTl.reverse();
+  gsap.to(refs.bodyEl, {
+    filter: 'none',
+    duration: config.mainDuration,
+    ease: 'power2.inOut',
+    onStart: () => {
+      electricTl.pause(0);
+    },
+  });
+};
+
 export const setupEelObserver = (
   refs: EelRefs,
   eelTl: gsap.core.Timeline,
@@ -43,20 +60,9 @@ export const setupEelObserver = (
       // For mobile/touch devices
       if (window.matchMedia('(hover: none)').matches) {
         if (eelTl.isActive() || eelTl.progress() > 0) {
-          // If animation is playing or has progress, stop both animations
-          eelTl.reverse();
-          gsap.to(refs.bodyEl, {
-            filter: 'none',
-            duration: config.mainDuration,
-            ease: 'power2.inOut',
-            onStart: () => {
-              electricTl.pause(0);
-            },
-          });
+          resetEelAnimation(refs, eelTl, electricTl, config);
         } else {
-          // Start both animations on first click
           eelTl.play();
-          electricTl.play(); // Explicitly play electric animation
         }
       }
     },
@@ -68,15 +74,7 @@ export const setupEelObserver = (
     },
     onHoverEnd: () => {
       if (window.matchMedia('(hover: hover)').matches) {
-        eelTl.reverse();
-        gsap.to(refs.bodyEl, {
-          filter: 'none',
-          duration: config.mainDuration,
-          ease: 'power2.inOut',
-          onStart: () => {
-            electricTl.pause(0);
-          },
-        });
+        resetEelAnimation(refs, eelTl, electricTl, config);
       }
     },
   });

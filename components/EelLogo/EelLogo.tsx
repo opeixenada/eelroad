@@ -7,7 +7,7 @@ import { EelBody } from './EelBody';
 import { EelHead } from './EelHead';
 import type { EelRefs, AnimationConfig } from './types';
 import { createElectricTimeline } from '@/components/EelLogo/animation/electricAnimation';
-import { createEelTimeline, setupEelObserver } from '@/components/EelLogo/animation/eelAnimation';
+import { createEelTimeline } from '@/components/EelLogo/animation/eelAnimation';
 
 gsap.registerPlugin(Observer);
 
@@ -32,8 +32,8 @@ export const EelLogo = () => {
 
     gsap.context(() => {
       const electricTl = createElectricTimeline(refs.bodyEl, ANIMATION_CONFIG);
-      const hoverTl = createEelTimeline(refs, electricTl, ANIMATION_CONFIG);
-      setupEelObserver(refs, hoverTl, electricTl, ANIMATION_CONFIG);
+      const eelTl = createEelTimeline(refs, electricTl, ANIMATION_CONFIG);
+      eelTl.play();
     });
   }, []);
 

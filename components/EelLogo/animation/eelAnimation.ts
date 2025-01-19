@@ -43,7 +43,7 @@ export const setupEelObserver = (
       // For mobile/touch devices
       if (window.matchMedia('(hover: none)').matches) {
         if (eelTl.isActive() || eelTl.progress() > 0) {
-          // If animation is playing or has progress, stop it
+          // If animation is playing or has progress, stop both animations
           eelTl.reverse();
           gsap.to(refs.bodyEl, {
             filter: 'none',
@@ -54,8 +54,9 @@ export const setupEelObserver = (
             },
           });
         } else {
-          // Start animation on first click
+          // Start both animations on first click
           eelTl.play();
+          electricTl.play(); // Explicitly play electric animation
         }
       }
     },

@@ -5,16 +5,9 @@ import gsap from 'gsap';
 import { Observer } from 'gsap/Observer';
 import { EelBody } from './EelBody';
 import { EelHead } from './EelHead';
-import type { EelRefs, AnimationConfig } from './types';
-import { createElectricTimeline } from '@/components/EelLogo/animation/electricAnimation';
-import { createEelTimeline } from '@/components/EelLogo/animation/eelAnimation';
+import type { EelRefs } from './types';
 
 gsap.registerPlugin(Observer);
-
-const ANIMATION_CONFIG: AnimationConfig = {
-  mainDuration: 0.3,
-  repeatDelay: 0.15,
-};
 
 export const EelLogo = () => {
   const wholeEel = useRef<SVGGElement>(null);
@@ -29,12 +22,6 @@ export const EelLogo = () => {
     };
 
     if (!refs.wholeEelEl || !refs.bodyEl || !refs.headEl) return;
-
-    gsap.context(() => {
-      const electricTl = createElectricTimeline(refs.bodyEl, ANIMATION_CONFIG);
-      const eelTl = createEelTimeline(refs, electricTl, ANIMATION_CONFIG);
-      eelTl.play();
-    });
   }, []);
 
   return (

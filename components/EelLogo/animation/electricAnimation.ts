@@ -2,7 +2,7 @@ import gsap from 'gsap';
 import { COLORS } from '../constants';
 import type { AnimationConfig } from '../types';
 
-const getElectricFilter = (lightSpread: number, darkSpread: number): string => {
+export const getElectricFilter = (lightSpread: number, darkSpread: number): string => {
   return `drop-shadow(0 0 ${lightSpread}px ${COLORS.ELECTRIC_LIGHT}) drop-shadow(0 0 ${darkSpread}px ${COLORS.ELECTRIC})`;
 };
 

@@ -6,6 +6,34 @@ export const EelBody = forwardRef<SVGPathElement>((props, ref) => {
 
   return (
     <>
+      <defs>
+        <filter
+          id="eelGlow"
+          x="-300%"
+          y="-300%"
+          width="700%"
+          height="700%"
+          primitiveUnits="userSpaceOnUse"
+        >
+          {/* First shadow - lighter, smaller spread */}
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur1" />
+          <feFlood floodColor={COLORS.ELECTRIC_LIGHT} result="color1" />
+          <feComposite operator="in" in="color1" in2="blur1" result="shadow1" />
+
+          {/* Second shadow - darker, larger spread */}
+          <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur2" />
+          <feFlood floodColor={COLORS.ELECTRIC} result="color2" />
+          <feComposite operator="in" in="color2" in2="blur2" result="shadow2" />
+
+          {/* Combine everything */}
+          <feMerge>
+            <feMergeNode in="shadow1" />
+            <feMergeNode in="shadow2" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
       <path
         ref={ref}
         d={PATH}
@@ -13,6 +41,7 @@ export const EelBody = forwardRef<SVGPathElement>((props, ref) => {
         stroke={COLORS.DEFAULT}
         strokeWidth="40"
         strokeLinecap="round"
+        filter="url(#eelGlow)"
       />
       <path d={PATH} fill="none" stroke={COLORS.WHITE} strokeWidth="4" strokeDasharray="20,20" />
     </>

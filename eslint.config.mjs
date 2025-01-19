@@ -1,8 +1,8 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-import prettier from 'eslint-config-prettier'
-import eslintPluginPrettier from 'eslint-plugin-prettier'
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { FlatCompat } from '@eslint/eslintrc';
+import prettier from 'eslint-config-prettier';
+import eslintPluginPrettier from 'eslint-plugin-prettier';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -12,19 +12,22 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    ignores: [
+      '.next/**',
+      'build/**',
+      'node_modules/**',
+      'public/**',
+      'coverage/**',
+      '.github/**',
+      '.vscode/**',
+    ],
+  },
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  {
+    files: ['**/*.{js,jsx,mjs,ts,tsx}'],
     rules: {
-      'prettier/prettier': ['error', {
-        singleQuote: true,
-        trailingComma: 'es5',
-        tabWidth: 2,
-        semi: true,
-        printWidth: 100,
-        bracketSpacing: true,
-        endOfLine: 'auto',
-      }],
+      'prettier/prettier': 'error', // This will use .prettierrc config
     },
   },
   prettier,

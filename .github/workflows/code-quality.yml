@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Check formatting
-        run: npx prettier --check "**/*.{js,jsx,ts,tsx,css,scss,md,json}"
+        run: npm run format:check
 
       - name: Run ESLint
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+        run: npm run lint

@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Eel Road',
-  description: 'The road of eel',
+  title: 'Eelroad',
+  description: 'The tao of eel',
 };
 
 export default function RootLayout({

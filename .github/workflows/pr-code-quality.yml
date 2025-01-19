@@ -1,7 +1,7 @@
-name: Code Quality
+name: Pull Request Code Quality
 
 on:
-  push:
+  pull_request:
     branches: [ main ]
 
 jobs:

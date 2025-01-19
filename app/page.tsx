@@ -1,9 +1,18 @@
+'use client';
+
+import React from 'react';
 import { EelLogo } from '@/components/EelLogo';
+
+const Hero = () => (
+  <section className="h-screen w-screen flex items-center justify-center">
+    <EelLogo />
+  </section>
+);
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex items-center justify-center w-screen">
-      <EelLogo />
-    </div>
+    <main className="relative">
+      <Hero />
+    </main>
   );
 }

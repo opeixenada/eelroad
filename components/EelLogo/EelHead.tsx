@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react';
-import { COLORS } from '@/components/EelLogo/constants';
+import React, { forwardRef } from "react";
+import { COLORS } from "@/components/EelLogo/constants";
 
 export const EelHead = forwardRef<SVGCircleElement>((props, ref) => {
   return (
@@ -10,4 +10,4 @@ export const EelHead = forwardRef<SVGCircleElement>((props, ref) => {
   );
 });
 
-EelHead.displayName = 'EelHead';
+EelHead.displayName = "EelHead";

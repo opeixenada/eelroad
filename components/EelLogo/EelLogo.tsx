@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import React, { useLayoutEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { Observer } from 'gsap/Observer';
-import { EelBody } from './EelBody';
-import { EelHead } from './EelHead';
-import type { EelRefs, AnimationConfig } from './types';
-import { createElectricTimeline } from '@/components/EelLogo/animation/electricAnimation';
-import { createEelTimeline, setupEelObserver } from '@/components/EelLogo/animation/eelAnimation';
+import React, { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { Observer } from "gsap/Observer";
+import { EelBody } from "./EelBody";
+import { EelHead } from "./EelHead";
+import type { EelRefs, AnimationConfig } from "./types";
+import { createElectricTimeline } from "@/components/EelLogo/animation/electricAnimation";
+import { createEelTimeline, setupEelObserver } from "@/components/EelLogo/animation/eelAnimation";
 
 gsap.registerPlugin(Observer);
 
@@ -39,7 +39,7 @@ export const EelLogo = () => {
 
   return (
     <svg
-      className="w-[90vw] h-[90vh] overflow-visible"
+      className="h-[90vh] w-[90vw] overflow-visible"
       viewBox="0 0 400 300"
       preserveAspectRatio="xMidYMid meet"
       fill="none"

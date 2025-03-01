@@ -1,12 +1,12 @@
-import gsap from 'gsap';
-import { COLORS } from '../constants';
-import type { EelRefs, AnimationConfig } from '../types';
-import { Observer } from 'gsap/Observer';
+import gsap from "gsap";
+import { COLORS } from "../constants";
+import type { EelRefs, AnimationConfig } from "../types";
+import { Observer } from "gsap/Observer";
 
 export const createEelTimeline = (
   { bodyEl, headEl }: EelRefs,
   electricTl: gsap.core.Timeline,
-  config: AnimationConfig
+  config: AnimationConfig,
 ) => {
   const eelTl = gsap.timeline({ paused: true });
 
@@ -24,7 +24,7 @@ export const createEelTimeline = (
         fill: COLORS.ELECTRIC,
         duration: config.mainDuration,
       },
-      '<'
+      "<",
     );
 
   return eelTl;
@@ -34,13 +34,13 @@ const resetEelAnimation = (
   refs: EelRefs,
   eelTl: gsap.core.Timeline,
   electricTl: gsap.core.Timeline,
-  config: AnimationConfig
+  config: AnimationConfig,
 ) => {
   eelTl.reverse();
   gsap.to(refs.bodyEl, {
-    filter: 'none',
+    filter: "none",
     duration: config.mainDuration,
-    ease: 'power2.inOut',
+    ease: "power2.inOut",
     onStart: () => {
       electricTl.pause(0);
     },
@@ -51,14 +51,14 @@ export const setupEelObserver = (
   refs: EelRefs,
   eelTl: gsap.core.Timeline,
   electricTl: gsap.core.Timeline,
-  config: AnimationConfig
+  config: AnimationConfig,
 ) => {
   return Observer.create({
     target: refs.wholeEelEl,
-    type: 'pointer',
+    type: "pointer",
     onClick: () => {
       // For mobile/touch devices
-      if (window.matchMedia('(hover: none)').matches) {
+      if (window.matchMedia("(hover: none)").matches) {
         if (eelTl.isActive() || eelTl.progress() > 0) {
           resetEelAnimation(refs, eelTl, electricTl, config);
         } else {
@@ -68,12 +68,12 @@ export const setupEelObserver = (
     },
     // Keep hover functionality for desktop
     onHover: () => {
-      if (window.matchMedia('(hover: hover)').matches) {
+      if (window.matchMedia("(hover: hover)").matches) {
         eelTl.play();
       }
     },
     onHoverEnd: () => {
-      if (window.matchMedia('(hover: hover)').matches) {
+      if (window.matchMedia("(hover: hover)").matches) {
         resetEelAnimation(refs, eelTl, electricTl, config);
       }
     },

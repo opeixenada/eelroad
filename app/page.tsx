@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { EelLogo } from '@/components/EelLogo';
+import React from "react";
+import { EelLogo } from "@/components/EelLogo";
 
 const Hero = () => (
-  <section className="h-screen w-screen flex items-center justify-center">
+  <section className="flex h-screen w-screen items-center justify-center">
     <EelLogo />
   </section>
 );

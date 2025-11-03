@@ -1,15 +1,7 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
 import prettier from "eslint-config-prettier";
 import eslintPluginPrettier from "eslint-plugin-prettier";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+import tseslint from "typescript-eslint";
 
 const eslintConfig = [
   {
@@ -23,17 +15,18 @@ const eslintConfig = [
       ".vscode/**",
     ],
   },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-  {
-    files: ["**/*.{js,jsx,mjs,ts,tsx}"],
-    rules: {
-      "prettier/prettier": "error", // This will use .prettierrc config
-    },
-  },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   prettier,
   {
+    files: ["**/*.{js,jsx,mjs,ts,tsx}"],
     plugins: {
       prettier: eslintPluginPrettier,
+    },
+    rules: {
+      "prettier/prettier": "error",
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-explicit-any": "warn",
     },
   },
 ];
